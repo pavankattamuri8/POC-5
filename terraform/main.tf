@@ -7,11 +7,11 @@ terraform {
     }
   }
 
-  # Configured to use your Terraform Cloud Organization
-  backend "remote" {
+  # FIXED: Updated block style and changed workspace name from aws-eks-poc to POC-5
+  cloud {
     organization = "Bhanu_Teja"
     workspaces {
-      name = "aws-eks-poc"
+      name = "POC-5"
     }
   }
 }
@@ -54,9 +54,7 @@ module "eks" {
   version = "~> 20.0"
 
   cluster_name    = var.cluster_name
-  
-  # FIXED: Upgraded from 1.29 to 1.30 to use supported active AWS AMIs
-  cluster_version = "1.30"
+  cluster_version = "1.30" # Upgraded to remain on a fully active AWS supported version
 
   cluster_endpoint_public_access = true
 
