@@ -60,20 +60,19 @@ module "eks" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
-  # FIX 1: Keeps the working encryption bypass code
   cluster_encryption_config        = []
   create_kms_key                  = false
   attach_cluster_encryption_policy = false
-
-  # FIX 2: Skips creating a fresh CloudWatch log group since it already exists from previous runs
-  create_cloudwatch_log_group = false
+  create_cloudwatch_log_group      = false
 
   eks_managed_node_groups = {
     poc_nodes = {
-      min_size       = 1
-      max_size       = 3
-      desired_size   = 2
-      instance_types = ["t3.medium"]
+      min_size     = 1
+      max_size     = 3
+      desired_size = 2
+      
+      # FIXED: Switched to t3.small based on your account's verified Free Tier list
+      instance_types = ["t3.small"]
     }
   }
 
