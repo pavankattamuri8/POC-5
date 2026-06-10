@@ -24,11 +24,13 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      # The reconfigure flag cleans out any leftover cloud settings
       - name: Terraform Init
         working-directory: ./terraform
         run: terraform init -reconfigure
+
 
       - name: Terraform Plan
         working-directory: ./terraform
