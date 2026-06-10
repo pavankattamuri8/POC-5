@@ -8,9 +8,9 @@ terraform {
   }
 
   cloud {
-    organization = "Bhanu_Teja"
+    organization = "pavankattamuri"
     workspaces {
-      name = "POC-5"
+      name = "poc-5"
     }
   }
 }
