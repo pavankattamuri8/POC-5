@@ -7,8 +7,13 @@ terraform {
     }
   }
 
-  # Removed Terraform Cloud remote backend and replaced with local backend
-  backend "local" {}
+  # Configured to use your Terraform Cloud Organization
+  backend "remote" {
+    organization = "Bhanu_Teja"
+    workspaces {
+      name = "aws-eks-poc"
+    }
+  }
 }
 
 provider "aws" {
@@ -49,7 +54,9 @@ module "eks" {
   version = "~> 20.0"
 
   cluster_name    = var.cluster_name
-  cluster_version = "1.29"
+  
+  # FIXED: Upgraded from 1.29 to 1.30 to use supported active AWS AMIs
+  cluster_version = "1.30"
 
   cluster_endpoint_public_access = true
 
